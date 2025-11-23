@@ -2,7 +2,25 @@
 
 An Outlook clone with AI-powered email sorting, auto-responses, spam filtering, and calendar management. Built with Go backend and React frontend.
 
-## Features
+## ⚡ Quick Start
+
+**Get up and running in 2 minutes:**
+
+```bash
+./scripts/quickstart.sh
+```
+
+This automated script will:
+- Guide you through OAuth setup for Google & Microsoft
+- Configure your AI provider (OpenAI, Azure, or free local LLM)
+- Install all dependencies
+- Start the application
+
+**Open http://localhost:3000 and sign in!**
+
+---
+
+## ✨ Features
 
 - 🔐 **OAuth2 Authentication** - Sign in with Google and Microsoft accounts
 - 📧 **Email Management** - Read, send, and organize emails via Gmail and Microsoft Graph APIs
@@ -10,9 +28,9 @@ An Outlook clone with AI-powered email sorting, auto-responses, spam filtering, 
 - ✍️ **AI Auto-Responses** - Generate smart email replies
 - 🛡️ **AI Spam Filtering** - Advanced spam detection using LLMs
 - 📅 **Smart Calendar** - AI-powered calendar management and scheduling
-- 🔌 **OpenAI Compatible** - Works with any OpenAI-compatible API endpoint
+- 🔌 **OpenAI Compatible** - Works with any OpenAI-compatible API endpoint (including **FREE local LLMs**)
 
-## Architecture
+## 🏗️ Architecture
 
 - **Backend**: Go with Gin framework
 - **Frontend**: React with TypeScript
@@ -21,66 +39,116 @@ An Outlook clone with AI-powered email sorting, auto-responses, spam filtering, 
 - **AI**: OpenAI-compatible endpoints (OpenAI, Azure OpenAI, local LLMs, etc.)
 - **Database**: SQLite (easily swappable)
 
-## Quick Start
+## 📖 Documentation
 
-### Prerequisites
+- **[QUICKSTART.md](./QUICKSTART.md)** - Get started in 5 minutes
+- **[INSTALL_GUIDE.md](./INSTALL_GUIDE.md)** - Complete installation guide
+- **[SETUP.md](./SETUP.md)** - Detailed setup instructions
+- **[FEATURES.md](./FEATURES.md)** - Full feature list
+
+## 🛠️ Setup Options
+
+### Option 1: Automated Setup (Recommended)
+
+Run the guided setup wizard:
+
+```bash
+./scripts/quickstart.sh
+```
+
+### Option 2: Automated OAuth Config Only
+
+Just need help with OAuth credentials?
+
+```bash
+./scripts/setup-oauth.sh
+```
+
+### Option 3: Manual Setup
+
+See [INSTALL_GUIDE.md](./INSTALL_GUIDE.md) for step-by-step instructions.
+
+## 🚀 Running the Application
+
+### Development Mode
+```bash
+make dev
+```
+
+Starts backend on http://localhost:8080 and frontend on http://localhost:3000
+
+### Production Build
+```bash
+make build
+./bin/email-client
+```
+
+## 🔧 Helpful Commands
+
+```bash
+# Check your environment and configuration
+./scripts/check-env.sh
+
+# Quick start with guided setup
+./scripts/quickstart.sh
+
+# Configure OAuth credentials only
+./scripts/setup-oauth.sh
+
+# Install all dependencies
+make install-deps
+
+# Run in development
+make dev
+
+# Build for production
+make build
+
+# Clean build artifacts
+make clean
+```
+
+## 📋 Prerequisites
 
 - Go 1.21 or higher
 - Node.js 18+ and npm
-- Google Cloud Console project with Gmail API enabled
-- Microsoft Azure AD app registration
-- OpenAI API key (or compatible endpoint)
+- Google Account (for Gmail integration)
+- Microsoft Account (optional, for Outlook integration)
+- OpenAI API key OR local LLM (Ollama/LM Studio)
 
-### Setup
+## 🤖 AI Provider Options
 
-1. Clone the repository and copy environment file:
+### OpenAI (Paid)
+Fast, high-quality AI responses
+- Get API key: https://platform.openai.com/api-keys
+- Model: GPT-4 Turbo
+
+### Local LLM (FREE!)
+100% private, runs on your machine
+
+**LM Studio** (Recommended for beginners):
+1. Download from https://lmstudio.ai/
+2. Download Mistral 7B model
+3. Start local server
+4. Configure in setup wizard
+
+**Ollama** (For developers):
 ```bash
-cp .env.example .env
+ollama pull mistral
+ollama serve
 ```
 
-2. Configure your `.env` file with your credentials
+### Azure OpenAI
+Enterprise-ready with your own deployment
 
-3. Run the backend:
-```bash
-go mod download
-go run cmd/server/main.go
-```
+## 📸 Screenshots
 
-4. Run the frontend:
-```bash
-cd web
-npm install
-npm start
-```
+![Login Page](docs/screenshots/login.png)
+![Dashboard](docs/screenshots/dashboard.png)
+![AI Reply](docs/screenshots/ai-reply.png)
+![Calendar](docs/screenshots/calendar.png)
 
-5. Open http://localhost:3000
-
-## Configuration
-
-### Google OAuth Setup
-
-1. Go to [Google Cloud Console](https://console.cloud.google.com/)
-2. Create a new project
-3. Enable Gmail API
-4. Create OAuth 2.0 credentials
-5. Add authorized redirect URI: `http://localhost:8080/auth/google/callback`
-6. Copy Client ID and Secret to `.env`
-
-### Microsoft OAuth Setup
-
-1. Go to [Azure Portal](https://portal.azure.com/)
-2. Register a new application
-3. Add permissions: Mail.Read, Mail.Send, Calendars.ReadWrite
-4. Add redirect URI: `http://localhost:8080/auth/microsoft/callback`
-5. Copy Application (client) ID and secret to `.env`
-
-### OpenAI Compatible Endpoints
-
-The app works with any OpenAI-compatible API:
-- **OpenAI**: `https://api.openai.com/v1`
-- **Azure OpenAI**: `https://YOUR_RESOURCE.openai.azure.com/`
-- **Local (LM Studio, Ollama)**: `http://localhost:1234/v1`
-- **Other providers**: Any API following OpenAI's spec
+*Note: Screenshots to be added*
 
 ## API Endpoints
 
